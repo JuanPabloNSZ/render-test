@@ -31,6 +31,20 @@ app.get("/api/notes", (request, response) => {
   response.json(notes);
 });
 
+// podemos definir parámetros para las rutas usando ":parametro"
+app.get("/api/notes/:id", (request, response) => {
+  // podemos acceder al parámetro a través de request.params
+  const id = Number(request.params.id);
+  // buscamos una nota cuyo id corresponda al parámetro
+  const note = notes.find((x) => x.id === id);
+
+  if (note) {
+    response.json(note);
+  } else {
+    response.status(404).end();
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
