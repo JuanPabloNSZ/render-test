@@ -45,6 +45,15 @@ app.get("/api/notes/:id", (request, response) => {
   }
 });
 
+app.delete("/api/notes/:id", (request, response) => {
+  // es necesario convertir a number porque el parámetro es un string
+  // y el id de la nota que queremos comparar es un number
+  const id = Number(request.params.id);
+  notes = notes.filter((note) => note.id !== id);
+
+  response.status(204).end();
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
