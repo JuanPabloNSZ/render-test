@@ -1,5 +1,8 @@
+const cors = require("cors");
 const express = require("express");
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 let notes = [
@@ -50,6 +53,7 @@ const generateId = () => {
   // map itera a través de cada elemento de notes y almacena las propiedades id en un nuevo array
   // se usa spread syntax (...) para desempaquetar los elementos de ese array
   // para que puedan ser usados como argumentos en Math.max()
+  // Esta función será usada al crear una nueva nota
   const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
   return maxId + 1;
 };
